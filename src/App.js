@@ -13,16 +13,21 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      projectPath: ""
+      projectPath: "",
+      projects: []
     }
   }
 
 
-  addProject = () => {
+  addProject = async () => {
     alert("projectPath", this.state.projectPath);
 
     var data = fs.readFileSync('./package.json', 'utf8');
-    console.log(data)
+    await this.preparePackageJson(this.state.projectPath, data);
+  }
+
+  preparePackageJson = (projectPath, data) => {
+
   }
   render() {
     return (
@@ -31,7 +36,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <input type="text" value={this.state.projectPath} className="project" />
+        <input type="text" className="project" />
         <button onClick={this.addProject}>Add</button>
       </div>
     )
